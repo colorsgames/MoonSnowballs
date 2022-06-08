@@ -19,7 +19,7 @@ public class ParticleController : MonoBehaviour
     private void Update()
     {
         curretTime += Time.deltaTime;
-        if(curretTime >= lifeTime)
+        if (curretTime >= lifeTime)
         {
             var emis = particleSystem.emission;
             emis.enabled = false;

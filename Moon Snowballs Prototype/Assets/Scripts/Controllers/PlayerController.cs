@@ -141,14 +141,14 @@ public class PlayerController : MonoBehaviour
     {
         curretHandRotationSpeed += handRotationSpeed * Time.fixedDeltaTime;
         hand.Rotate(Vector3.forward * curretHandRotationSpeed * Time.fixedDeltaTime);
-        if(curretHandRotationSpeed * Time.fixedDeltaTime >= maxHandRotationSpeedForTrail)
+        if (curretHandRotationSpeed * Time.fixedDeltaTime >= maxHandRotationSpeedForTrail)
         {
             trail.SetActive(true);
         }
         curreFlyTime += Time.fixedDeltaTime;
         if (curreFlyTime >= maxTimeForFly)
         {
-                rigidbody2D.AddForce(transform.up * flyForce, ForceMode2D.Force);
+            rigidbody2D.AddForce(transform.up * flyForce, ForceMode2D.Force);
         }
     }
 
@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor")
         {
             isGround = true;
         }
@@ -222,12 +222,12 @@ public class PlayerController : MonoBehaviour
 
     private void AI()
     {
-        if(Random.Range(0, 100) == 1)
+        if (Random.Range(0, 100) == 1)
         {
             Jump();
             return;
         }
-        if(curretHandUpDelay < handUpDelay)
+        if (curretHandUpDelay < handUpDelay)
             curretHandUpDelay += Time.fixedDeltaTime;
 
         Vector2 direction = target.transform.position - head.position;

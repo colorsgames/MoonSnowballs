@@ -35,7 +35,7 @@ public class CometSpawner : MonoBehaviour
                 comets[i].gameObject.SetActive(true);
                 comets[i].ChangeParams();
             }
-            
+
             yield return new WaitForSeconds(time);
         }
     }

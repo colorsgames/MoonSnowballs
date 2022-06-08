@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
     {
         float distance = offset.magnitude;
 
-        if(distance > minDistance)
+        if (distance > minDistance)
         {
             float lerpingSize = Mathf.Lerp(cam.orthographicSize, oldSize + (distance - minDistance), orthographicSizeChangeSpeed * Time.deltaTime);
             cam.orthographicSize = lerpingSize;

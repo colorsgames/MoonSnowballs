@@ -45,7 +45,7 @@ public class HealthController : MonoBehaviour
     private void Update()
     {
         helmets[indexHelmet].SetActive(true);
-        if(indexHelmet > 0)
+        if (indexHelmet > 0)
         {
             helmets[indexHelmet - 1].SetActive(false);
         }
@@ -64,12 +64,12 @@ public class HealthController : MonoBehaviour
     {
         health -= _damage;
 
-        if(health == oldHealth / 2)
+        if (health == oldHealth / 2)
         {
             indexHelmet = 1;
         }
 
-        if(health <= 0)
+        if (health <= 0)
         {
             Destroy();
         }
