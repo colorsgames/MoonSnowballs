@@ -145,12 +145,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         restartGame = false;
+        scorePlayerBlue.value = 0;
+        scorePlayerRed.value = 0;
         SceneManager.LoadScene(scene.buildIndex);
     }
 
     public void ExitGame()
     {
         Time.timeScale = 1;
+        scorePlayerBlue.value = 0;
+        scorePlayerRed.value = 0;
         SceneManager.LoadScene(0);
     }
 

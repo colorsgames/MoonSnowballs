@@ -4,20 +4,47 @@ using UnityEngine;
 
 public class CometSpawner : MonoBehaviour
 {
-    public GameObject cometPrefab;
+    [SerializeField] private GameObject cometPrefab;
 
-    public float spawnDelay;
+    [SerializeField] private int cometSpawnCount;
+    [SerializeField] private float changePosDelay;
 
-    float curretTime;
+    private CometController[] comets;
 
-    private void Update()
+    private void Start()
     {
-        curretTime += Time.deltaTime;
-        if(curretTime >= spawnDelay)
+        comets = new CometController[cometSpawnCount];
+
+        for (int i = 0; i < comets.Length; i++)
         {
-            Vector3 position = new Vector3(Random.Range(-200, 200), Random.Range(-200, 200), 10);
-            Instantiate(cometPrefab, position, Quaternion.identity);
-            curretTime = 0;
+            comets[i] = Instantiate(cometPrefab).GetComponent<CometController>();
+        }
+
+        StartCoroutine(ChangePos(changePosDelay));
+    }
+
+    IEnumerator ChangePos(float time)
+    {
+        while (true)
+        {
+            for (int i = 0; i < comets.Length; i++)
+            {
+                comets[i].gameObject.SetActive(false);
+                Vector3 position = new Vector3(Random.Range(-200, 200), Random.Range(-200, 200), 10);
+                comets[i].transform.position = position;
+                comets[i].gameObject.SetActive(true);
+                comets[i].ChangeParams();
+            }
+            
+            yield return new WaitForSeconds(time);
+        }
+    }
+
+    void SetActiveComets(bool value)
+    {
+        foreach (CometController comet in comets)
+        {
+            comet.gameObject.SetActive(value);
         }
     }
 }

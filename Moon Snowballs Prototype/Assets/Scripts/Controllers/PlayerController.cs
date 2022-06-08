@@ -10,35 +10,36 @@ public enum PlayerMod
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerMod mod = PlayerMod.Player;
+    [SerializeField] private PlayerMod mod = PlayerMod.Player;
 
-    public LayerMask layer;
-    public LayerMask AILayer;
+    [SerializeField] private LayerMask layer;
+    [SerializeField] private LayerMask AILayer;
 
-    public GameObject dropParticlePredab;
-    public GameObject trail;
-    public GameObject shellPrefab;
-    public GameObject visualShell;
-    public Transform hand;
-    public Transform shellSpawnPoint;
-    public Transform head;
-    public HealthController healthController;
+    [SerializeField] private GameObject dropParticlePredab;
+    [SerializeField] private GameObject trail;
+    [SerializeField] private GameObject shellPrefab;
+    [SerializeField] private GameObject visualShell;
+    [SerializeField] private Transform hand;
+    [SerializeField] private Transform shellSpawnPoint;
+    [SerializeField] private Transform head;
+    [SerializeField] private HealthController healthController;
 
-    public float maxTimeForFly;
-    public float maxSpeedForSpawnParticle;
-    public float maxHandRotationSpeedForTrail;
-    public float force;
-    public float jumpRotatoinForce;
-    public float rotatoinForce;
-    public float rayDistance;
-    public float maxDelay;
-    public float handRotationSpeed;
-    public float shellForce;
-    public float shootDelay;
-    public float flyForce;
+    [SerializeField] private float maxTimeForFly;
+    [SerializeField] private float maxSpeedForSpawnParticle;
+    [SerializeField] private float maxHandRotationSpeedForTrail;
+    [SerializeField] private float force;
+    [SerializeField] private float jumpRotatoinForce;
+    [SerializeField] private float rotatoinForce;
+    [SerializeField] private float rayDistance;
+    [SerializeField] private float maxDelay;
+    [SerializeField] private float handRotationSpeed;
+    [SerializeField] private float shellForce;
+    [SerializeField] private float shootDelay;
+    [SerializeField] private float flyForce;
     [Header("AI options")]
-    public float handUpDelay;
-    public float lookDistance;
+    [SerializeField] private float handUpDelay;
+    [SerializeField] private float lookDistance;
+    [SerializeField] private float attackLookDistance;
 
     GameObject target;
 
@@ -230,29 +231,19 @@ public class PlayerController : MonoBehaviour
             curretHandUpDelay += Time.fixedDeltaTime;
 
         Vector2 direction = target.transform.position - head.position;
+        direction.Normalize();
         if (Physics2D.Raycast(head.position, direction, lookDistance, AILayer))
         {
             if (curretHandUpDelay >= handUpDelay)
             {
-                if (!Physics2D.Raycast(hand.position, hand.TransformDirection(Vector3.down), 100, AILayer))
+                if (!Physics2D.Raycast(hand.position, hand.TransformDirection(Vector3.down), attackLookDistance, AILayer))
                 {
-                    /*
-                    RaycastHit2D hit2D = Physics2D.Raycast(hand.position, hand.TransformDirection(Vector3.down), 100, AILayer);
-                    if(hit2D.collider.name != "Head_0")
-                    {
-                        ShootDown();
-                    }
-                    else
-                    {
-                        ShootUp();
-                    }
-                    */
                     startHandRot = true;
                 }
                 else
                 {
-                    RaycastHit2D hit2D = Physics2D.Raycast(hand.position, hand.TransformDirection(Vector3.down), 100, AILayer);
-                    if (hit2D.collider.name == "Head_0")
+                    RaycastHit2D hit2D = Physics2D.Raycast(hand.position, hand.TransformDirection(Vector3.down), attackLookDistance, AILayer);
+                    if (hit2D.collider.GetComponent<HealthController>())
                     {
                         Shoot();
                         startHandRot = false;
@@ -272,9 +263,9 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * rayDistance);
         Gizmos.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * rayDistance);
-        Gizmos.DrawRay(hand.position, hand.TransformDirection(Vector3.down) * 10);
+        Gizmos.DrawRay(hand.position, hand.TransformDirection(Vector3.down) * attackLookDistance);
 
         Vector2 direction = GameObject.Find("Head_0").transform.position - head.position;
-        Gizmos.DrawRay(head.position, direction * lookDistance);
+        Gizmos.DrawRay(head.position, direction.normalized * lookDistance);
     }
 }

@@ -1116,7 +1116,6 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
-  - component: {fileID: 519420035}
   m_Layer: 13
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1266,20 +1265,6 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &519420035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3c52dc8f060204db13011700ad8f31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cometPrefab: {fileID: 1126965751955571909, guid: 0ab39222ae61d9b428add73d373e5897, type: 3}
-  spawnDelay: 2
 --- !u!1 &584649528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,7 +1989,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 140}
   m_SizeDelta: {x: -1817, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1011703527
@@ -2539,8 +2524,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayManager, Assembly-CSharp
+      - m_Target: {fileID: 123128324}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
@@ -3243,6 +3228,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1268542355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1268542357}
+  - component: {fileID: 1268542356}
+  m_Layer: 0
+  m_Name: CometSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1268542356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268542355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3c52dc8f060204db13011700ad8f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cometPrefab: {fileID: 1126965751955571909, guid: 0ab39222ae61d9b428add73d373e5897, type: 3}
+  cometSpawnCount: 100
+  changePosDelay: 10
+--- !u!4 &1268542357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268542355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1272945535
 GameObject:
@@ -10432,8 +10463,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayManager, Assembly-CSharp
+      - m_Target: {fileID: 123128324}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartScene
         m_Mode: 1
         m_Arguments:
@@ -11037,7 +11068,7 @@ MonoBehaviour:
     m_Bits: 256
   AILayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2304
   dropParticlePredab: {fileID: 3745076887626048462, guid: a3bbbb0608bc55841bf3baf7dbc145dd, type: 3}
   trail: {fileID: 8898061250916897892}
   shellPrefab: {fileID: 3500598547126341269, guid: fc92fe7928f599541a194cbcc60af55d, type: 3}
@@ -11060,6 +11091,7 @@ MonoBehaviour:
   flyForce: 7
   handUpDelay: 2
   lookDistance: 20
+  attackLookDistance: 100
 --- !u!50 &2090232747
 Rigidbody2D:
   serializedVersion: 4
