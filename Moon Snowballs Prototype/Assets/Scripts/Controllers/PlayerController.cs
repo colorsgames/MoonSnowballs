@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
             if (mod == PlayerMod.AI)
             {
-                if (!PlayManager.restartGame)
+                if (!GameManager.restartGame)
                     AI();
                 else
                 {

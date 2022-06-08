@@ -22,13 +22,9 @@ public class Shell : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Head_0")
+        if (collision.GetComponent<HealthController>())
         {
-            collision.gameObject.GetComponent<HealthController>().Damage(damage);
-        }
-        if (collision.gameObject.name == "Head_1")
-        {
-            collision.gameObject.GetComponent<HealthController>().Damage(damage);
+            collision.GetComponent<HealthController>().Damage(damage);
         }
     }
 }
