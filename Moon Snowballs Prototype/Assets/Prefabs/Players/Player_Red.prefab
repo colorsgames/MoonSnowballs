@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802398440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.016}
+  m_LocalPosition: {x: 0, y: -1.1494253, z: 0.016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8898061249978709836}
@@ -72,10 +72,10 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.15
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -93,8 +93,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.6179246, g: 0.98900235, b: 1, a: 1}
-      key1: {r: 0.6179246, g: 0.98900235, b: 1, a: 0}
+      key0: {r: 1, g: 0.61960787, b: 0.6231509, a: 1}
+      key1: {r: 1, g: 0.61960787, b: 0.62352943, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -126,7 +126,7 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.05
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!1 &8898061249562287908
@@ -232,6 +232,7 @@ MonoBehaviour:
   flyForce: 7
   handUpDelay: 0
   lookDistance: 0
+  attackLookDistance: 0
 --- !u!114 &8898061249562287909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +398,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
   m_Color: {r: 0.4901961, g: 0.6313726, b: 0.7294118, a: 1}
   m_FlipX: 0
@@ -538,6 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427a8d1963f19b04584dcad193699a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroy: 0
   glassParticlePrefab: {fileID: 719699114660802682, guid: 1e1578f4a86444249a8bb6da1de3652c, type: 3}
   normalHead: {fileID: 21300000, guid: 3eac8aa12280db248bf01ee14f54cc1e, type: 3}
   deadHead: {fileID: 21300000, guid: 4a2b86b00ab024c47ae8d4f96ce052b2, type: 3}
@@ -547,9 +549,8 @@ MonoBehaviour:
   - {fileID: 8898061250407943128}
   - {fileID: 8898061251522506397}
   - {fileID: 8898061249663996340}
-  destroy: 0
   health: 100
-  index: 0
+  indexHelmet: 0
 --- !u!1 &8898061249978709811
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +622,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: dccc27d3b2e775240a97b507f4e48b0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

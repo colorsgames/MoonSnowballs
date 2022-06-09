@@ -7,14 +7,18 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform playerBlue;
     [SerializeField] private Transform playerRed;
 
-    [SerializeField] private float minDistance;
+    [SerializeField] private float maxDistance;
     [SerializeField] private float followingSpeed;
     [SerializeField] private float orthographicSizeChangeSpeed;
+    [SerializeField] private float zoomSize;
 
+    bool startZoom;
 
     float oldSize;
 
     Camera cam;
+
+    Transform zoomTarget;
 
     Vector3 target;
 
@@ -31,25 +35,50 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 offset = playerBlue.position - playerRed.position;
-        target = GetMiddleBetweenTargets(playerBlue.position, playerRed.position);
+        Following();
 
+        if (!startZoom)
+        {
+            Vector2 offset = playerBlue.position - playerRed.position;
+            target = GetMiddleBetweenTargets(playerBlue.position, playerRed.position);
+
+            ChangeOrtographicSize(offset);
+        }
+        else
+        {
+            target = zoomTarget.position;
+            ChangeOrtographicSize(zoomSize);
+        }        
+    }
+
+    void Following()
+    {
         Vector3 newLerpPos = Vector3.Lerp(transform.position, target, followingSpeed * Time.deltaTime);
         newLerpPos.z = transform.position.z;
         transform.position = newLerpPos;
-
-        ChangeOrtographicSize(offset);
     }
 
     void ChangeOrtographicSize(Vector3 offset)
     {
         float distance = offset.magnitude;
 
-        if (distance > minDistance)
+        if (distance > maxDistance)
         {
-            float lerpingSize = Mathf.Lerp(cam.orthographicSize, oldSize + (distance - minDistance), orthographicSizeChangeSpeed * Time.deltaTime);
+            float lerpingSize = Mathf.Lerp(cam.orthographicSize, oldSize + (distance - maxDistance) / 2f, orthographicSizeChangeSpeed * Time.deltaTime);
             cam.orthographicSize = lerpingSize;
         }
+    }
+
+    void ChangeOrtographicSize(float size)
+    {
+        float lerpingSize = Mathf.Lerp(cam.orthographicSize, size, orthographicSizeChangeSpeed * Time.deltaTime);
+        cam.orthographicSize = lerpingSize;
+    }
+
+    public void StartZoom(Transform target)
+    {
+        zoomTarget = target;
+        startZoom = true;
     }
 
     private Vector3 GetMiddleBetweenTargets(Vector3 first, Vector3 second)

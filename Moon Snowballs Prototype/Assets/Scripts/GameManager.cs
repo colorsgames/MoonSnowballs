@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private IntValue scorePlayerBlue;
     [SerializeField] private IntValue scorePlayerRed;
 
+    CameraController cameraController;
+
     bool gameover;
 
     Scene scene;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         scene = SceneManager.GetActiveScene();
+        cameraController = Camera.main.GetComponent<CameraController>();
     }
 
     private void Update()
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
             scorePlayerRed.value++;
             restartGame = true;
             OpenCloseButtons(false);
+            cameraController.StartZoom(playerBlue.transform);
             playerBlue.destroyName = null;
         }
         if (playerRed.destroyName == "Head_1")
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
             scorePlayerBlue.value++;
             restartGame = true;
             OpenCloseButtons(false);
+            cameraController.StartZoom(playerRed.transform);
             playerRed.destroyName = null;
         }
         if (scorePlayerBlue.value >= maxScore)
