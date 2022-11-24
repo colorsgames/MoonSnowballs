@@ -5,7 +5,8 @@ using UnityEngine;
 public enum PlayerMod
 {
     Player,
-    AI
+    AI,
+    Blue
 };
 
 public class PlayerController : MonoBehaviour
@@ -58,7 +59,6 @@ public class PlayerController : MonoBehaviour
         target = GameObject.Find("Head_0");
     }
 
-
     private void FixedUpdate()
     {
         if (healthController.destroy)
@@ -98,6 +98,23 @@ public class PlayerController : MonoBehaviour
             }
 
             Equilibrium();
+        }
+    }
+
+    private void Update()
+    {
+        if (mod == PlayerMod.AI) return;
+        if (mod == PlayerMod.Blue)
+        {
+            if (Input.GetKeyDown(KeyCode.A)) Jump();
+            if (Input.GetKeyDown(KeyCode.D)) ShootDown();
+            if (Input.GetKeyUp(KeyCode.D)) ShootUp();
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.RightArrow)) Jump();
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) ShootDown();
+            if (Input.GetKeyUp(KeyCode.LeftArrow)) ShootUp();
         }
     }
 
