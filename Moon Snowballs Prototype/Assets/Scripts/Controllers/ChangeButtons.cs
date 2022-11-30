@@ -10,7 +10,7 @@ public class ChangeButtons : MonoBehaviour
     [SerializeField] private GameObject text;
 
     Button button;
-
+    
     public bool isPC;
 
     private void Start()

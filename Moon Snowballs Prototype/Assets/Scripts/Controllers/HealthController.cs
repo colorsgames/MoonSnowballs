@@ -18,6 +18,8 @@ public class HealthController : MonoBehaviour
 
     [SerializeField] private int indexHelmet;
 
+    PlayerTeam team;
+
     SpriteRenderer SpriteRenderer;
 
     float oldHealth;
@@ -37,6 +39,9 @@ public class HealthController : MonoBehaviour
 
     private void Start()
     {
+        team = GetComponentInParent<PlayerTeam>();
+        ChangeName();
+        GameManager.instance.AddHead(this);
         SpriteRenderer = GetComponent<SpriteRenderer>();
 
         oldHealth = health;
@@ -72,6 +77,18 @@ public class HealthController : MonoBehaviour
         if (health <= 0)
         {
             Destroy();
+        }
+    }
+
+    void ChangeName()
+    {
+        if(team.team == Team.Blue)
+        {
+            gameObject.name = "Head_0";
+        }
+        else
+        {
+            gameObject.name = "Head_1";
         }
     }
 

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0a5811b5faee1a4284fdd744c7f42f3, type: 3}
+  m_Name: Blue
+  m_EditorClassIdentifier: 
+  head: {fileID: 21300000, guid: 42e6e339a36a57840834b294fce0aff3, type: 3}
+  deadHead: {fileID: 21300000, guid: dd07c5bba3eccd84f90baccdf23860ca, type: 3}
+  helmet: {fileID: 21300000, guid: f66fbee0377cbcf4c8d9bb128cedb7fc, type: 3}
+  helmetDilapidate: {fileID: 21300000, guid: 882b48430ee5bf44ba2221a8674867b7, type: 3}
+  helmetDestroy: {fileID: 21300000, guid: beb8196e82f870344b2905927f74acbf, type: 3}
+  hand: {fileID: 21300000, guid: a333568f09fb0684ba01ef7cf8af5c54, type: 3}
+  body: {fileID: 21300000, guid: 982cc2b2fd041f343bbeb2edd6c05107, type: 3}
+  ballon: {fileID: 21300000, guid: e7a539f19c0fad5459243a0ce50ae7ed, type: 3}
+  shell: {fileID: 3500598547126341269, guid: dd00bd834fb9e5448ab9c44695489df9, type: 3}
+  mpShell: {fileID: 3500598547126341269, guid: 28899d1248d8d8c4e873f543615f1a34, type: 3}
+  trailColor:
+    serializedVersion: 2
+    key0: {r: 0.6179246, g: 0.98900235, b: 1, a: 1}
+    key1: {r: 0.6179246, g: 0.98900235, b: 1, a: 0}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2

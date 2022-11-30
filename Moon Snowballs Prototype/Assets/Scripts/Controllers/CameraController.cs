@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform playerBlue;
-    [SerializeField] private Transform playerRed;
+    public static CameraController instance;
+
+    [SerializeField] private List<Transform> players;
 
     [SerializeField] private float maxDistance;
     [SerializeField] private float followingSpeed;
@@ -22,15 +23,22 @@ public class CameraController : MonoBehaviour
 
     Vector3 target;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         cam = GetComponent<Camera>();
         oldSize = cam.orthographicSize;
-
-        Vector2 offset = playerBlue.position - playerRed.position;
-        target = GetMiddleBetweenTargets(playerBlue.position, playerRed.position);
-        target.z = transform.position.z;
-        transform.position = target;
+        if (players.Count == 2)
+        {
+            Vector2 offset = players[0].position - players[1].position;
+            target = GetMiddleBetweenTargets(players[0].position, players[1].position);
+            target.z = transform.position.z;
+            transform.position = target;
+        }
     }
 
     private void FixedUpdate()
@@ -39,16 +47,28 @@ public class CameraController : MonoBehaviour
 
         if (!startZoom)
         {
-            Vector2 offset = playerBlue.position - playerRed.position;
-            target = GetMiddleBetweenTargets(playerBlue.position, playerRed.position);
+            if (players.Count == 2)
+            {
+                Vector2 offset = players[0].position - players[1].position;
+                target = GetMiddleBetweenTargets(players[0].position, players[1].position);
 
-            ChangeOrtographicSize(offset);
+                ChangeOrtographicSize(offset);
+            }
+            else if(players.Count == 1)
+            {
+                target = players[0].position;
+            }
         }
         else
         {
             target = zoomTarget.position;
             ChangeOrtographicSize(zoomSize);
         }        
+    }
+
+    public void AddPlayer(Transform transform)
+    {
+        players.Add(transform);
     }
 
     void Following()
@@ -87,12 +107,5 @@ public class CameraController : MonoBehaviour
         float distance = offset.magnitude;
         Vector3 middleTarget = second + offset.normalized * distance / 2;
         return middleTarget;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector3 offset = playerRed.position - playerBlue.position;
-        Gizmos.DrawSphere(GetMiddleBetweenTargets(playerBlue.position, playerRed.position), 0.5f);
-        Gizmos.DrawRay(playerBlue.position, offset.normalized * offset.magnitude);
     }
 }

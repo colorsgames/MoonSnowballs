@@ -5,8 +5,7 @@ using UnityEngine;
 public enum PlayerMod
 {
     Player,
-    AI,
-    Blue
+    AI
 };
 
 public class PlayerController : MonoBehaviour
@@ -16,9 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask layer;
     [SerializeField] private LayerMask AILayer;
 
-    [SerializeField] private GameObject dropParticlePredab;
+    [SerializeField] private GameObject dropParticlePrefab;
     [SerializeField] private GameObject trail;
-    [SerializeField] private GameObject shellPrefab;
     [SerializeField] private GameObject visualShell;
     [SerializeField] private Transform hand;
     [SerializeField] private Transform shellSpawnPoint;
@@ -42,7 +40,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float lookDistance;
     [SerializeField] private float attackLookDistance;
 
+    PlayerTeam playerTeam;
+
     GameObject target;
+    GameObject shellPrefab;
 
     float curreFlyTime;
     float curretHandRotationSpeed;
@@ -55,8 +56,18 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        CameraController.instance.AddPlayer(transform);
+        playerTeam = GetComponent<PlayerTeam>();
+
+        shellPrefab = playerTeam.shellPref;
+
         rigidbody2D = GetComponent<Rigidbody2D>();
         target = GameObject.Find("Head_0");
+
+        if(playerTeam.team == Team.Red)
+        {
+            jumpRotatoinForce *= -1;
+        }
     }
 
     private void FixedUpdate()
@@ -104,7 +115,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (mod == PlayerMod.AI) return;
-        if (mod == PlayerMod.Blue)
+        if (playerTeam.team == Team.Blue)
         {
             if (Input.GetKeyDown(KeyCode.A)) Jump();
             if (Input.GetKeyDown(KeyCode.D)) ShootDown();
@@ -215,7 +226,7 @@ public class PlayerController : MonoBehaviour
                 Vector2 hitPoint = item.point;
                 if (rigidbody2D.velocity.magnitude >= maxSpeedForSpawnParticle)
                 {
-                    Instantiate(dropParticlePredab, hitPoint, Quaternion.identity);
+                    Instantiate(dropParticlePrefab, hitPoint, Quaternion.identity);
                 }
             }
         }

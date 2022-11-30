@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Floor
   - Shell
+  - Player_Blue
+  - Player_Red
   layers:
   - Default
   - TransparentFX
